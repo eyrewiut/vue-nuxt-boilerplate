@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxt-5min-storyblok',
+    title: 'storyblok-nuxt-template',
     htmlAttrs: {
       lang: 'en'
     },
@@ -20,11 +20,14 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    "modern-normalize",
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/components'
+    "~/plugins/composition-api",
+    '~/plugins/components',
+    "~/plugins/rich-text-renderer"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -32,8 +35,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
+    "@unocss/nuxt"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -43,16 +45,28 @@ export default {
     [
       'storyblok-nuxt',
       {
-        accessToken: '432cQ9VTZJMlxGzBORHWSwtt',
+        accessToken: process.env.SB_ACCESS_TOKEN,
         cacheProvider: 'memory'
       }
     ],
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+    postcss: {
+      plugins: {
+      },
+    }
+  },
+
+  unocss: {
+    uno: true,
+    attributify: true,
+
+    shortcuts: [],
+    rules: [],
+  },
+
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {},
 }
